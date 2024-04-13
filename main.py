@@ -1,7 +1,6 @@
+from models.transaction import Transaction
+
 class Initialize():
-    def __init__(self):
-        self.__transaction = []
-    
     def show_menu(menu):
         print(50 * '-')
         print('Bem vindo ao Controle Financeiro')
@@ -24,13 +23,13 @@ class Initialize():
         value = input('\nInforme o valor: ')
         description = input('\nInforme a descrição: ')
 
-        self.__transaction.append(
-            (operation, value, description)
-        )
+        transaction = Transaction(operation, value, description)
+        transaction.save()
+
+        del transaction #apaga o objeto
     
     def to_view(self):
-        for transaction in  self.__transaction:
-            print(f'Operation: {transaction[0]} - Value: {transaction[1]} - description : {transaction[2]}')
+        Transaction().view()
 
     def to_go_out(self):
         print('\nObrigado, volte sempre')
